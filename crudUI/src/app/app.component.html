@@ -1,0 +1,112 @@
+<ng-container *ngIf="createFrom == true">
+  <section class="h-100 h-custom" style="background-color: #8fc4b7;">
+    <button class="btn btn-danger" (click)="closeForm()">Close Form</button>
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-6">
+          <div class="card rounded-3">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp"
+              class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+              alt="Sample photo">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Add Student</h3>
+
+              <form class="px-md-2" #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example1q" class="form-control" name="StudentName" [(ngModel)]="formData.StudentName" required />
+                  <label class="form-label" for="form3Example1q">Name</label>
+                </div>
+                  <div class="col-md-6 mb-4">
+                    <select class="select" name="gender" [(ngModel)]="formData.Gender">
+                      <option name="Gender" disabled>Gender</option>
+                      <option name="Gender">Female</option>
+                      <option name="Gender">Male</option>
+                      <option name="Gender">Other</option>
+                    </select>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example1q" class="form-control"  name="Standard" [(ngModel)]="formData.Standard"/>
+                    <label class="form-label" for="form3Example1q">Standard</label>
+                  </div>
+                <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>
+
+
+<!-- STUDENTS DETAILS -->
+<ng-container *ngIf="userDetails == true">
+<button class="btn btn-success" (click)="createNew()">Add New Student</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Class</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of allData">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.studentName}}</td>
+        <td>{{item.gender}}</td>
+        <td>{{item.standard}}</td>
+        <td><!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#exampleModal" (click)="edit(item.id)">
+            Edit
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form class="px-md-2" #myForm="ngForm" (ngSubmit)="editData(myForm.value)">
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form3Example1q" class="form-control" name="id" [(ngModel)]="formData.id" required />
+                      <label class="form-label" for="form3Example1q">Id</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form3Example1q" class="form-control" name="StudentName" [(ngModel)]="formData.StudentName" required />
+                      <label class="form-label" for="form3Example1q">Name</label>
+                    </div>
+                      <div class="col-md-6 mb-4">
+                        <select class="select" name="gender" [(ngModel)]="formData.Gender">
+                          <option name="Gender" disabled>Gender</option>
+                          <option name="Gender">Female</option>
+                          <option name="Gender">Male</option>
+                          <option name="Gender">Other</option>
+                        </select>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form3Example1q" class="form-control"  name="Standard" [(ngModel)]="formData.Standard"/>
+                        <label class="form-label" for="form3Example1q">Standard</label>
+                      </div>
+                    <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Update</button>
+                </div>
+              </div>
+            </div>
+          </div></td>
+        <td><button class="btn btn-danger" (click)="deleteOneItem(item.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+
